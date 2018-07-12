@@ -10,9 +10,11 @@ const logger        = require('morgan');
 const path          = require('path');
 const session       = require("express-session");
 const MongoStore    = require("connect-mongo")(session);
-// const bcrypt        = require("bcrypt");
-// const passport      = require("passport");
-// const LocalStrategy = require("passport-local").Strategy;
+const bcrypt        = require("bcrypt");
+const passport      = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const User         = require("./models/user");
+const flash        = require("connect-flash");
 
 
 mongoose.Promise = Promise;
@@ -35,12 +37,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session({
-  secret: "basic-auth-secret",
-  cookie: { maxAge: 60000 },
-  store: new MongoStore({
-    mongooseConnection: mongoose.connection,
-    ttl: 24 * 60 * 60 // 1 day
-  })
+  secret: "our-passport-local-strategy-app",
+  resave: true,
+  saveUninitialized: true
 }));
 
 // Express View engine setup
@@ -65,11 +64,45 @@ hbs.registerHelper('ifUndefined', (value, options) => {
   }
 });
 
+passport.serializeUser((user, cb) => {
+  cb(null, user._id);
+});
+
+passport.deserializeUser((id, cb) => {
+  User.findById(id, (err, user) => {
+    if (err) { return cb(err); }
+    cb(null, user);
+  });
+});
+
+app.use(flash());
+passport.use(new LocalStrategy( { passReqToCallback: true }, (req, username, password, next) => {
+  User.findOne({ username }, (err, user) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return next(null, false, { message: "Incorrect username!!!" });
+    }
+    if (!bcrypt.compareSync(password, user.password)) {
+      return next(null, false, { message: "Incorrect password" });
+    }
+
+    return next(null, user);
+  });
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 // default value for title local
 app.locals.title = 'Faching';
 
 //Routes
-const authRoutes = require('./routes/auth-routes');
+const index = require('./routes/index');
+const authRoutes = require("./routes/auth-routes");
+
+app.use('/', index);
 app.use('/', authRoutes);
 
 module.exports = app;
