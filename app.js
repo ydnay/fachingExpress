@@ -13,13 +13,12 @@ const MongoStore    = require("connect-mongo")(session);
 const bcrypt        = require("bcrypt");
 const passport      = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const User         = require("./models/User");
-const flash        = require("connect-flash");
-
+const User          = require("./models/User");
+const flash         = require("connect-flash");
 
 mongoose.Promise = Promise;
 mongoose
-  .connect('mongodb://localhost/Faching', {useMongoClient: true})
+  .connect(process.env.MONGODB_URI, {useMongoClient: true})
   .then(() => {
     console.log('Connected to Mongo!')
   }).catch(err => {
@@ -36,10 +35,12 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
 app.use(session({
   secret: "our-passport-local-strategy-app",
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: new MongoStore( { mongooseConnection: mongoose.connection })
 }));
 
 // Express View engine setup
@@ -76,6 +77,8 @@ passport.deserializeUser((id, cb) => {
 });
 
 app.use(flash());
+require('./passport')(app);
+
 passport.use(new LocalStrategy( { passReqToCallback: true }, (req, username, password, next) => {
   User.findOne({ username }, (err, user) => {
     if (err) {
