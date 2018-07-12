@@ -2,9 +2,19 @@
 const mongoose = require("mongoose");
 const Schema   = mongoose.Schema;
 
+function capitalizeFirstLetter(letter) {
+  if (typeof letter !== 'string') letter = '';
+  return letter.charAt(0).toUpperCase() + letter.substring(1);
+}
+
 const userSchema = new Schema({
-  username: String,
-  password: String
+  // name: {
+  //   first: { type: String, set: capitalizeFirstLetter, required: true },
+  //   last: { type: String, set: capitalizeFirstLetter, required: true }
+  // },
+  username: { type: String, unique: true, required : true },
+  password: { type: String, required: true },
+  // email: { type: String, unique: true, required: true },
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });

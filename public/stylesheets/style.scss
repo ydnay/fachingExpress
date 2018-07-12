@@ -12,7 +12,8 @@ a {
   width: 380px;
 }
 
-#form label {
+#form label,
+#welcome {
   color: #666;
   display: inline-block;
   margin-bottom: 10px;
@@ -21,15 +22,17 @@ a {
 }
 
 #form input,
-#form button {
+#form-container,
+button {
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 24px;
   outline: 0;
   padding: 4px;
   width: 100%;
 }
 
-#form button {
+#form button,
+#logout {
   background: #43a3e6;
   border: 1px solid #43a3e6;
   border-radius: 4px;
