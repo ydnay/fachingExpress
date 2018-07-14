@@ -1,4 +1,23 @@
-{{!-- <h1>{{title}}</h1> --}}
-<h1>Welcome to {{title}}</h1>
-<a href="/login"><button>Sing In</button></a><br><br>
-<a href="/signup"><button>Sing Up</button></a>
+
+<div class="splash">
+  <img class="ui large circular image wallpaper" src="/images/pal-log.png">
+
+  <h1 class="ui header">Welcome to {{title}}</h1>
+  <p>an app for a closer fly</p>
+
+  <form class="ui massive form" action="/login" method="POST">
+    <div class="field">
+      <input type="text" placeholder="username">
+    </div>
+
+    <div class="field">
+      <input type="password" placeholder="password" autocomplete="off">
+    </div>
+
+    <div class="field">
+      <a href="/signup">Already have an account? Sing Up</a>
+    </div>
+
+    <a href="/login"><button class="massive ui button" id="bot">Sing In</button></a>
+  </form><br>
+</div>
