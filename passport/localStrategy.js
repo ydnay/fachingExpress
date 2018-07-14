@@ -43,7 +43,7 @@ function emailRepeat(email){
     })
     .catch(err => {
       console.log('Email issues, check again:', err);
-      // next(); 
+      next(); 
     });
 }
 

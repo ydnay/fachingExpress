@@ -68,7 +68,7 @@ authRoutes.post("/signup", (req, res, next) => {
 
 authRoutes.get('/logout', (req, res, next) => {
   if (!req.session.currentUser) {
-    res.redirect('/');
+    res.redirect('/login');
     return;
   }
 
@@ -78,7 +78,8 @@ authRoutes.get('/logout', (req, res, next) => {
       return;
     }
 
-    res.redirect('/');
+    req.logout();
+    res.redirect('/login');
   });
 });
 

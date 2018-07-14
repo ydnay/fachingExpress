@@ -6,6 +6,9 @@ body {
 form {
   padding: 10% 15%; }
 
+p {
+  padding: 5% 10% 0 10%; }
+
 .field {
   padding: 5%; }
 
