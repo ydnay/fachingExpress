@@ -2,6 +2,7 @@ const express       = require("express");
 const authRoutes    = express.Router();
 const passport      = require("passport");
 const ensureLogin   = require('connect-ensure-login');
+// const ensureLogout  = require('connect-ensure-login');
 
 // User model
 const User          = require("../models/User");
@@ -20,7 +21,7 @@ authRoutes.get("/login", (req, res, next) => {
 
 authRoutes.post("/login", passport.authenticate("local", {
   successRedirect: "/private-page",
-  failureRedirect: "/login",
+  failureRedirect: "/",
   failureFlash: true,
   passReqToCallback: true
 }));
@@ -28,6 +29,14 @@ authRoutes.post("/login", passport.authenticate("local", {
 authRoutes.get("/signup", (req, res, next) => {
   res.render("auth/signup");
 });
+
+// Need sign up local strategy
+// authRoutes.post('/signup', ensureLogout.ensureLoggedOut(), passport.authenticate('local', {
+//   successRedirect: '/',
+//   failureRedirect: '/auth/signup',
+//   failureFlash: true, 
+//   passReqToCallback: true
+// }));
 
 authRoutes.post("/signup", (req, res, next) => {
   const username = req.body.username;
@@ -57,30 +66,45 @@ authRoutes.post("/signup", (req, res, next) => {
       if (err) {
         res.render("auth/signup", { message: "Something went wrong" });
       } else {
-        res.redirect("/");
       }
-    });
+    })
+    .then((userFromDb) => {
+      console.log("user form db after sign up", userFromDb);
+      req.session.currentUser = userFromDb
+      res.redirect("/private-page");
+    })
   })
   .catch(error => {
     next(error)
   })
 });
 
-authRoutes.get('/logout', (req, res, next) => {
-  if (!req.session.currentUser) {
-    res.redirect('/login');
-    return;
-  }
+// authRoutes.get('/logout', (req, res, next) => {
+//   if (!req.session.currentUser) {
+//     res.redirect('/login');
+//     return;
+//   }
 
+//   req.session.destroy((err) => {
+//     if (err) {
+//       next(err);
+//       return;
+//     }
+
+//     req.logout();
+//     res.redirect('/login');
+//   });
+// });
+
+authRoutes.get("/logout", (req, res) => {
+  req.logout();
   req.session.destroy((err) => {
     if (err) {
       next(err);
       return;
     }
-
-    req.logout();
-    res.redirect('/login');
-  });
+  });  
+  res.redirect("/login");
 });
 
 module.exports = authRoutes;

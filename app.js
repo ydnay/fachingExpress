@@ -16,6 +16,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const User          = require("./models/User");
 const flash         = require("connect-flash");
 
+
 mongoose.Promise = Promise;
 mongoose
   .connect(process.env.MONGODB_URI, {useMongoClient: true})
@@ -37,33 +38,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(session({
-  secret: "our-passport-local-strategy-app",
+  secret: "Faching",
   resave: true,
   saveUninitialized: true,
-  store: new MongoStore( { mongooseConnection: mongoose.connection })
+  cookie: { maxAge: 6000000 },
+  store: new MongoStore( { mongooseConnection: mongoose.connection }),
+  ttl: 24 * 60 * 60 // 1 day
 }));
-
-// Express View engine setup
-app.use(require('node-sass-middleware')({
-  src:  path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public'),
-  sourceMap: true
-}));
-
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
-
-hbs.registerHelper('ifUndefined', (value, options) => {
-  if (arguments.length < 2)
-      throw new Error("Handlebars Helper ifUndefined needs 1 parameter");
-  if (typeof value !== undefined ) {
-      return options.inverse(this);
-  } else {
-      return options.fn(this);
-  }
-});
 
 passport.serializeUser((user, cb) => {
   cb(null, user._id);
@@ -77,8 +58,8 @@ passport.deserializeUser((id, cb) => {
 });
 
 app.use(flash());
-require('./passport')(app);
 
+// Login local strategy
 passport.use(new LocalStrategy( { passReqToCallback: true }, (req, username, password, next) => {
   User.findOne({ username }, (err, user) => {
     if (err) {
@@ -97,6 +78,39 @@ passport.use(new LocalStrategy( { passReqToCallback: true }, (req, username, pas
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Express View engine setup
+app.use(require('node-sass-middleware')({
+  src:  path.join(__dirname, 'public'),
+  dest: path.join(__dirname, 'public'),
+  sourceMap: true
+}));
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
+
+//Confirm currentUser is logged in. 
+app.use((req, res, next) => {
+  if (req.session.currentUser) {
+    res.locals.currentUserInfo = req.session.currentUser;
+    res.locals.isUserLoggedIn = true;
+  } else {
+    res.locals.isUserLoggedIn = false;
+  }
+  next();
+});
+
+hbs.registerHelper('ifUndefined', (value, options) => {
+  if (arguments.length < 2)
+      throw new Error("Handlebars Helper ifUndefined needs 1 parameter");
+  if (typeof value !== undefined ) {
+      return options.inverse(this);
+  } else {
+      return options.fn(this);
+  }
+});
 
 // default value for title local
 app.locals.title = 'Faching';
