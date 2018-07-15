@@ -1,27 +1,27 @@
-<div class="splash">
+<div class="login">
   <img class="ui large circular image wallpaper" src="/images/pal-log.png">
 
-  <h1 class="ui header">Welcome to {{title}}</h1>
+  <h1 id="title" class="ui header">Welcome to {{title}}</h1>
   <p>an app for a closer fly</p>
 
   <form class="ui massive form" action="/login" method="POST">
     <div class="field">
-      <input type="text" placeholder="username" name="username">
+      <input type="text" name="username" placeholder="username">
     </div>
 
     <div class="field">
-      <input type="password" placeholder="password" autocomplete="off" name="password">
+      <input type="password" name="password" placeholder="password" autocomplete="off">
     </div>
 
     <div class="field">
-      <a href="/signup">Already have an account? Sign Up</a>
+      <a href="/signup">Don't have an account? Sign Up</a>
     </div>
 
-    <a href="/login"><button class="massive ui button" id="bot">Sign In</button></a>
+    <a href="/login"><button class="ui massive button" id="bot-login">Sign In</button></a>
   </form><br>
 
   {{#if errorMessage }}
     <div class="error-message">{{ errorMessage }}</div>
   {{/if}}
-  
+
 </div>

@@ -6,25 +6,31 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+// #title {
+//   font-size: xx-large;
+// }
+
 form {
   padding: 10% 15%;
 }
 
-p{
+p {
   padding: 5% 10% 0 10%;
 }
 
 .field {
-  padding: 5%;
+  padding: 3%;
 }
 
 img {
   // display: block;
-  padding: 15% 5%;
+  padding: 10% 5%;
   margin: auto;
 }
 
-#bot {
+#bot-index,
+#bot-login,
+#bot-sign-up {
   margin: 10%;
   background-color: #0098DA;
   color: white;
@@ -89,6 +95,8 @@ img {
   width: 100%;
 }
 
-.splash {
+.splash,
+.login,
+.signup {
   text-align: center;
 }

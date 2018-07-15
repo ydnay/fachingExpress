@@ -1,19 +1,39 @@
 <!-- views/auth/signup.hbs -->
-<h2>Signup</h2>
+<div class="signup">
+  <img class="ui large circular image wallpaper" src="/images/pal-log.png">
 
-<form action="/signup" method="POST" id="form-container" class="form">
-  <input id="username" type="text" name="username" placeholder="JonSnow">
-  <input id="password" type="password" name="password" placeholder="Your password">
+  <h1 class="ui header">Register</h1>
+
+  <form class="ui massive form" action="/signup" method="POST">
+    <div class="field">
+      <input type="text" name="first-name" placeholder="First">
+    </div>
+
+    <div class="field">
+      <input type="text" name="last-name" placeholder="Last">
+    </div>
+
+    <div class="field">
+      <input type="text" name="email" placeholder="email">
+    </div>
+
+    <div class="field">
+      <input type="password" name="password" placeholder="choose password">
+    </div>
+
+    <div class="field">
+      <input type="password" name="password-confirmation" placeholder="confirm password">
+    </div>
+
+    <div class="field">
+      <a href="/login">Already have an account? Sign in</a>
+    </div>
+
+    <button id="bot-sign-up" class="ui massive button" type="submit">Submit</button>
+  </form>
 
   {{#if message}}
     <div class="error-message">{{ message }}</div>
   {{/if}}
-  <br><br>
 
-  <button>Create account</button>
-
-  <p class="account-message">
-    Do you already have an account?
-    <a href="/">Login</a>
-  </p>
-</form>
+</div>

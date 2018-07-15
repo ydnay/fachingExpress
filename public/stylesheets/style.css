@@ -10,13 +10,15 @@ p {
   padding: 5% 10% 0 10%; }
 
 .field {
-  padding: 5%; }
+  padding: 3%; }
 
 img {
-  padding: 15% 5%;
+  padding: 10% 5%;
   margin: auto; }
 
-#bot {
+#bot-index,
+#bot-login,
+#bot-sign-up {
   margin: 10%;
   background-color: #0098DA;
   color: white; }
@@ -29,7 +31,9 @@ img {
   padding: 20px;
   width: 100%; }
 
-.splash {
+.splash,
+.login,
+.signup {
   text-align: center; }
 
 /*# sourceMappingURL=style.css.map */
