@@ -2,7 +2,7 @@ const express       = require("express");
 const authRoutes    = express.Router();
 const passport      = require("passport");
 const ensureLogin   = require('connect-ensure-login');
-// const ensureLogout  = require('connect-ensure-login');
+const ensureLogout  = require('connect-ensure-login');
 
 // User model
 const User          = require("../models/User");
@@ -19,12 +19,26 @@ authRoutes.get("/login", (req, res, next) => {
   res.render("auth/login", { "message": req.flash("error") });
 });
 
-authRoutes.post("/login", passport.authenticate("local", {
+authRoutes.post("/login", ensureLogout.ensureLoggedOut(), passport.authenticate("local", {
   successRedirect: "/private-page",
-  failureRedirect: "/",
+  failureRedirect: "/login",
   failureFlash: true,
   passReqToCallback: true
 }));
+
+// authRoutes.get('/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
+//   console.log(req);
+//   User.findById(req.params)
+//     .then(user => {
+//       console.log(req.params.id)
+//       res.render('users/dashboard', {user});
+//       console.log(req.params.id);
+//     })
+//     .catch(err => {
+//       console.log(`User not found ${err}`);
+//       next();
+//     });
+// });
 
 authRoutes.get("/signup", (req, res, next) => {
   res.render("auth/signup");
