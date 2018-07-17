@@ -9,12 +9,14 @@ function capitalizeFirstLetter(letter) {
 
 const userSchema = new Schema({
   // name: {
-  //   first: { type: String, set: capitalizeFirstLetter, required: true },
-  //   last: { type: String, set: capitalizeFirstLetter, required: true }
+    // first: { type: String, set: capitalizeFirstLetter, required: true },
+    // last: { type: String, set: capitalizeFirstLetter, required: true }
   // },
   username: { type: String, unique: true, required : true },
   password: { type: String, required: true },
   // email: { type: String, unique: true, required: true },
+  // phone: String,
+  profilePic: { type: String, default: "/images/user-default-avatar.jpg" }
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });

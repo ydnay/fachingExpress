@@ -1,0 +1,29 @@
+{{!-- <img src={{foundUser.profilePic}} class="ui avatar image"> --}}
+{{!-- {{foundUser.name.first}} {{foundUser.name.last}}  --}}
+{{!-- {{foundUser.profilePic}} --}}
+
+{{!-- <h1>{{foundUser.username}}</h1> --}}
+{{!-- <span>{{foundUser.password}}</span> --}}
+{{!-- <a href="/login"><button>Return to Login</button></a>
+<a href="/logout"><button id="logout">Logout!</button></a> --}}
+
+<div class="dashboard">
+  <img class="ui medium circular image" src={{foundUser.profilePic}}>
+  <h1>Welcome <br>{{foundUser.username}}</h1>
+
+  <a href="/"><button class="ui massive button" id="bot-login">My Birds</button></a>
+
+  <a href="/"><button class="ui massive button" id="bot-login">Area Activity</button></a>
+
+  <a href="/"><button class="ui massive button" id="bot-login">Trading</button></a>
+
+  <a href="/"><button class="ui massive button" id="bot-login">Search Keeper</button></a>
+
+  <a href="/logout"><button class="ui massive button" id="bot-login">Logout</button></a>
+
+
+  {{#if errorMessage }}
+    <div class="error-message">{{ errorMessage }}</div>
+  {{/if}}
+
+</div>
