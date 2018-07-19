@@ -16,7 +16,7 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   // email: { type: String, unique: true, required: true },
   // phone: String,
-  profilePic: { type: String, default: "/images/user-default-avatar.jpg" }
+  profilePic: { type: String, default: "/images/user-default-avatar.png" }
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });
