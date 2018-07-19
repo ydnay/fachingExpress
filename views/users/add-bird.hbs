@@ -1,0 +1,20 @@
+<div class="birds">
+  <img class="ui medium circular image" src={{foundBird.profilePic}}>
+  <h1>Welcome <br>{{foundUser.username}}</h1>
+
+  <a href="/"><button class="ui massive button" id="bot-birds">Hey</button></a>
+
+  {{!-- <a href="/"><button class="ui massive button" id="bot-login">Area Activity</button></a> --}}
+
+  {{!-- <a href="/"><button class="ui massive button" id="bot-login">Trading</button></a> --}}
+
+  {{!-- <a href="/"><button class="ui massive button" id="bot-login">Search</button></a> --}}
+
+  <a href="/logout"><button class="ui massive button" id="bot-login">Logout</button></a>
+
+
+  {{#if errorMessage }}
+    <div class="error-message">{{ errorMessage }}</div>
+  {{/if}}
+
+</div>
