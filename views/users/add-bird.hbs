@@ -1,20 +1,36 @@
+<!-- views/users/add-bird.hbs -->
 <div class="birds">
-  <img class="ui medium circular image" src={{foundBird.profilePic}}>
-  <h1>Welcome <br>{{foundUser.username}}</h1>
+  <img class="ui medium circular image" src="/images/pal-default-avatar.png">
 
-  <a href="/"><button class="ui massive button" id="bot-birds">Hey</button></a>
+  <h1 class="ui header">Add Bird</h1>
 
-  {{!-- <a href="/"><button class="ui massive button" id="bot-login">Area Activity</button></a> --}}
+  <form class="ui massive form" action="birds/add-bird" method="POST">
 
-  {{!-- <a href="/"><button class="ui massive button" id="bot-login">Trading</button></a> --}}
+    <div class="field">
+      <input type="text" name="name" placeholder="name">
+    </div>
 
-  {{!-- <a href="/"><button class="ui massive button" id="bot-login">Search</button></a> --}}
+    <div class="field">
+      <input type="text" name="color" placeholder="color">
+    </div>
 
-  <a href="/logout"><button class="ui massive button" id="bot-login">Logout</button></a>
+    <div class="field">
+      <input type="date" name="dob">
+    </div>
 
+    <div class="field">
+      <input type="number" name="catches" placeholder="number of catches eg. 12">
+    </div>
 
-  {{#if errorMessage }}
-    <div class="error-message">{{ errorMessage }}</div>
+    <div class="field">
+      <a href="users/dashboard">Go Back</a>
+    </div>
+
+    <button id="bot-add-bird" class="ui massive button" type="submit">Submit</button>
+  </form>
+
+  {{#if message}}
+    <div class="error-message">{{ message }}</div>
   {{/if}}
 
 </div>

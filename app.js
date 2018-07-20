@@ -119,9 +119,11 @@ app.locals.title = 'Faching';
 const index = require('./routes/index');
 const authRoutes = require("./routes/auth-routes");
 const userRoutes = require('./routes/user');
+const birdRoutes = require('./routes/bird');
 
 app.use('/', index);
 app.use('/', authRoutes);
 app.use('/users', userRoutes);
+app.use('/birds', birdRoutes);
 
 module.exports = app;

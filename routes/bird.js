@@ -9,6 +9,7 @@ router.get('/add-bird', (req, res, next) => {
   const dob       = req.body.dob;
   const captures  = req.body.captures;
   const keeper    = req.session.passport.user;
+  console.log(name, color, dob, captures);
 
   if (name === `` || color === ``) {
     res.render(`/users/add-bird`, { message: `Indicate name and color` });

@@ -8,7 +8,7 @@ const birdSchema = new Schema({
   dob: { type: Date },
   captures: { type: Number },
   keeper: { type : Schema.Types.ObjectId, ref: 'Users', required: true },
-  profilePic: { type: String, default: "/images/pig-default-avatar.jpg" }
+  profilePic: { type: String, default: "/images/pal-default-avatar.png" }
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });
