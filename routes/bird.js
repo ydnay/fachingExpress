@@ -4,22 +4,26 @@ const User          = require('../models/User');
 const Bird          = require('../models/Bird');
 
 router.get('/add-bird', (req, res, next) => {
+  res.render('birds/add-bird');
+});
+
+router.post('/add-bird', (req, res, next) => {
   const name      = req.body.name;
   const color     = req.body.color;
   const dob       = req.body.dob;
   const captures  = req.body.captures;
   const keeper    = req.session.passport.user;
-  console.log(name, color, dob, captures);
+  console.log(name, color, dob, captures, keeper);
 
   if (name === `` || color === ``) {
-    res.render(`/users/add-bird`, { message: `Indicate name and color` });
+    res.render(`/birds/add-bird`, { message: `Indicate name and color` });
     return;
   }
 
   Bird.findOne({ name })
   .then(bird => {
     if (bird !== null) {
-      res.render(`users/add-bird`, { message: `The bird already exists` });
+      res.render(`birds/add-bird`, { message: `The bird already exists` });
       return;
     }
 
@@ -33,7 +37,7 @@ router.get('/add-bird', (req, res, next) => {
 
     newBird.save((err) => {
       if (err) {
-        res.render(`users/add-bird`, { message: `Something went wrong ${err}` });
+        res.render(`birds/add-bird`, { message: `Something went wrong ${err}` });
       }
     })
     .then((birdFromDb) => {
