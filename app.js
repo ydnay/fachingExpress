@@ -8,13 +8,13 @@ const hbs           = require('hbs');
 const mongoose      = require('mongoose');
 const logger        = require('morgan');
 const path          = require('path');
-const session       = require("express-session");
-const MongoStore    = require("connect-mongo")(session);
-const bcrypt        = require("bcrypt");
-const passport      = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-const User          = require("./models/User");
-const flash         = require("connect-flash");
+const session       = require('express-session');
+const MongoStore    = require('connect-mongo')(session);
+const bcrypt        = require('bcrypt');
+const passport      = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const User          = require('./models/User');
+const flash         = require('connect-flash');
 
 
 mongoose.Promise = Promise;
@@ -38,7 +38,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(session({
-  secret: "Faching",
+  secret: 'Faching',
   resave: true,
   saveUninitialized: true,
   cookie: { maxAge: 6000000 },
@@ -66,10 +66,10 @@ passport.use(new LocalStrategy( { passReqToCallback: true }, (req, username, pas
       return next(err);
     }
     if (!user) {
-      return next(null, false, { message: "Incorrect username!!!" });
+      return next(null, false, { message: 'Incorrect username!!!' });
     }
     if (!bcrypt.compareSync(password, user.password)) {
-      return next(null, false, { message: "Incorrect password" });
+      return next(null, false, { message: 'Incorrect password' });
     }
 
     return next(null, user);
@@ -104,7 +104,7 @@ app.use((req, res, next) => {
 
 hbs.registerHelper('ifUndefined', (value, options) => {
   if (arguments.length < 2)
-      throw new Error("Handlebars Helper ifUndefined needs 1 parameter");
+      throw new Error('Handlebars Helper ifUndefined needs 1 parameter');
   if (typeof value !== undefined ) {
       return options.inverse(this);
   } else {
@@ -117,7 +117,7 @@ app.locals.title = 'Faching';
 
 //Routes
 const index = require('./routes/index');
-const authRoutes = require("./routes/auth-routes");
+const authRoutes = require('./routes/auth-routes');
 const userRoutes = require('./routes/user');
 const birdRoutes = require('./routes/bird');
 

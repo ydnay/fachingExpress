@@ -1,5 +1,5 @@
 // models/Bird.js
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
 const birdSchema = new Schema({
@@ -8,11 +8,11 @@ const birdSchema = new Schema({
   dob: { type: Date },
   captures: { type: Number },
   keeper: { type : Schema.Types.ObjectId, ref: 'Users', required: true },
-  profilePic: { type: String, default: "/images/pal-default-avatar.png" }
+  profilePic: { type: String, default: '/images/pal-default-avatar.png' }
 }, {
-  timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
+  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 });
 
-const Bird = mongoose.model("Bird", birdSchema);
+const Bird = mongoose.model('Bird', birdSchema);
 
 module.exports = Bird;

@@ -1,4 +1,4 @@
-const express       = require("express");
+const express       = require('express');
 const router        = express.Router();
 const User          = require('../models/User');
 const ensureLogin   = require('connect-ensure-login');
@@ -14,8 +14,6 @@ const ensureLogin   = require('connect-ensure-login');
 // });
 
 router.get('/dashboard', (req, res, next) => {
-  console.log(req.session.passport.user);
-  console.log(req.params.id);
   const user = req.session.passport.user;
   User.findById(user, (err, foundUser) => { 
     if (err) {
