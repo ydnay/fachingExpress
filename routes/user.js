@@ -1,6 +1,7 @@
 const express       = require('express');
 const router        = express.Router();
 const User          = require('../models/User');
+const Bird          = require('../models/Bird');
 const ensureLogin   = require('connect-ensure-login');
 // const bcrypt        = require('bcrypt');
 
@@ -24,6 +25,11 @@ router.get('/dashboard', (req, res, next) => {
     console.log(foundUser);
     res.render('users/dashboard', { foundUser });
   });
+});
+
+router.get('/birds', (req, res, next) => {
+  const user = req.session.passport.user;
+  Bird.find
 });
 
 module.exports = router;

@@ -7,7 +7,7 @@ const ensureLogin   = require('connect-ensure-login');
 router.get('/add-bird', (req, res, next) => {
   res.render('birds/add-bird');
 });
-              // /birds/add-bird
+
 router.post('/add-bird', (req, res, next) => {
   const name      = req.body.name;
   const color     = req.body.color;
@@ -53,5 +53,7 @@ router.post('/add-bird', (req, res, next) => {
     next(error)
   })
 });
+
+
 
 module.exports = router;

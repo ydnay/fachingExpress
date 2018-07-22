@@ -11,15 +11,15 @@ const User          = require('../models/User');
 const bcrypt        = require('bcrypt');
 const bcryptSalt    = 10;
 
-authRoutes.get('/private-page', ensureLogin.ensureLoggedIn(), (req, res) => {
-  res.render('auth/private', { user: req.user });
-});
+// authRoutes.get('/private-page', ensureLogin.ensureLoggedIn(), (req, res) => {
+//   res.render('auth/private', { user: req.user });
+// });
 
 authRoutes.get('/login', (req, res, next) => {
   res.render('auth/login', { 'message': req.flash('error') });
 });
 
-authRoutes.post('/login', ensureLogout.ensureLoggedOut(), passport.authenticate('local', {
+authRoutes.post('/login', passport.authenticate('local', {
   successRedirect: '/users/dashboard',
   failureRedirect: '/login',
   failureFlash: true,
@@ -68,33 +68,16 @@ authRoutes.post('/signup', (req, res, next) => {
       } else {
       }
     })
-    .then((userFromDb) => {
-      console.log('user form db after sign up', userFromDb);
-      req.session.currentUser = userFromDb
-      res.redirect('/login');
-    })
+    // .then((userFromDb) => {
+    //   // console.log('user form db after sign up', userFromDb);
+    //   // req.session.currentUser = userFromDb
+    //   res.redirect('/login');
+    // })
   })
   .catch(error => {
     next(error)
   })
 });
-
-// authRoutes.get('/logout', (req, res, next) => {
-//   if (!req.session.currentUser) {
-//     res.redirect('/login');
-//     return;
-//   }
-
-//   req.session.destroy((err) => {
-//     if (err) {
-//       next(err);
-//       return;
-//     }
-
-//     req.logout();
-//     res.redirect('/login');
-//   });
-// });
 
 authRoutes.get('/logout', (req, res) => {
   req.logout();
