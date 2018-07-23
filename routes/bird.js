@@ -54,6 +54,4 @@ router.post('/add-bird', (req, res, next) => {
   })
 });
 
-
-
 module.exports = router;

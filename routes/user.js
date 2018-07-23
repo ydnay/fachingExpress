@@ -28,8 +28,19 @@ router.get('/dashboard', (req, res, next) => {
 });
 
 router.get('/birds', (req, res, next) => {
-  const user = req.session.passport.user;
-  Bird.find
+  // const keeper = req.session.passport.user;
+  // console.log(keeper);
+  Bird.find({ keeper: req.session.passport.user }, (err, foundBirds) => {
+    if (err) {
+      console.log(err);
+      next(err);
+      return;
+    }
+    console.log(foundBirds);
+    foundBirds.forEach(bird => {
+      res.render('users/birds', { bird });
+    })
+  })
 });
 
 module.exports = router;
