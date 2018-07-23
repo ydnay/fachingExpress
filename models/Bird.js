@@ -6,7 +6,7 @@ const birdSchema = new Schema({
   name: { type: String },
   color: [ { type: String } ],
   dob: { type: Date },
-  captures: { type: Number },
+  catches: { type: String },
   keeper: { type : Schema.Types.ObjectId, ref: 'Users', required: true },
   profilePic: { type: String, default: '/images/pal-default-avatar.png' }
 }, {
