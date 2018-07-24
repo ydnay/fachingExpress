@@ -1,14 +1,15 @@
 <div class="birds">
-  {{!-- {{#foreach foundBird}} --}}
-  <img class="ui medium circular image" src={{bird.profilePic}}>
-  <h1>Name: {{bird.name}}</h1>
-  <h1>Color: {{bird.color}}</h1>
-  <h1>DOB: {{bird.dob}}</h1>
-  <h1>Catches: {{bird.catches}}</h1>
+  {{#each foundBirds}}
+    <img class="ui medium circular image" src={{this.profilePic}}>
+    <h1>Name: {{this.name}}</h1>
+    <h1>Color: {{this.color}}</h1>
+    {{!-- Change DOB ISODate format--}}
+    <h1>DOB: {{this.dob}}</h1>
+    <h1>Catches: {{this.catches}}</h1>
 
-  <a href="/"><button class="ui massive button" id="bot-login">Edit Bird</button></a>
+    <a href="/birds/edit"><button class="ui massive button" id="bot-login">Edit Bird</button></a>
 
-  <a href="/"><button class="ui massive button" id="bot-login">Delete Bird</button></a>
-  {{!-- <h1>Welcome <br>{{foundBird.name}}</h1> --}}
-  {{!-- {{/foreach}} --}}
+    <a href="/birds/delete"><button class="ui massive button" id="bot-login">Delete Bird</button></a>
+    {{!-- <h1>Welcome <br>{{foundBird.name}}</h1> --}}
+  {{/each}}
 </div>

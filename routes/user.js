@@ -37,9 +37,7 @@ router.get('/birds', (req, res, next) => {
       return;
     }
     console.log(foundBirds);
-    foundBirds.forEach(bird => {
-      res.render('users/birds', { bird });
-    })
+    res.render('users/birds', { foundBirds });
   })
 });
 
