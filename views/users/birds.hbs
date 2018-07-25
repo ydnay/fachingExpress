@@ -1,8 +1,9 @@
 <div class="birds">
   {{#each foundBirds}}
     <img class="ui medium circular image" src={{this.profilePic}}>
-    <h1>Name: {{this.name}}</h1>
-    <h1>Color: {{this.color}}</h1>
+    {{!-- <h1 hidden>Id: {{this._id}}</h1> --}}
+    <h1>Name: {{this.name}} ---- Color: {{this.color}}</h1>
+    {{!-- <h1>Color: {{this.color}}</h1> --}}
     {{!-- Change DOB ISODate format--}}
     <h1>DOB: {{this.dob}}</h1>
     <h1>Catches: {{this.catches}}</h1>

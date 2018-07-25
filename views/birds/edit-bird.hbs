@@ -4,22 +4,26 @@
 
   <h1 class="ui header">Edit Bird</h1>
 
-  <form class="ui massive form" action="/birds/edit-bird" method="POST">
+  <form class="ui massive form" action="/birds/edit" method="POST">
+
+    {{!-- <div class="field">
+      <input type="text" name="_id" value={{this._id}}>
+    </div> --}}
 
     <div class="field">
-      <input type="text" name="name" placeholder="name">
+      <input type="text" name="name" placeholder="Enter the name of your bird">
     </div>
 
     <div class="field">
-      <input type="text" name="color" placeholder="color">
+      <input type="text" name="color" placeholder="new color">
     </div>
 
     <div class="field">
-      <input type="date" name="dob">
+      <input type="date" name="new dob">
     </div>
 
     <div class="field">
-      <input type="number" name="catches" placeholder="number of catches eg. 12">
+      <input type="number" name="catches" placeholder="how many catches">
     </div>
 
     <div class="field">

@@ -60,17 +60,21 @@ router.get('/edit', (req, res, next) => {
 });
 
 // Edit bird
-// router.post('/edit', (req, res, next) => {
-//   const { name, color, dob, catches } = req.body;
-//   const keeper = req.session.passport.user;
-//   Book.findOneAndUpdate({ keeper: keeper}, { $set: {name, color, dob, catches }})
-//   .then((bird) => {
-//     res.redirect('/users/dashboard')
-//   })
-//   .catch((error) => {
-//     next(error)
-//   });
-// });
+// Modify to findByIdAndUpdate to be able to change name
+// Fix dob null
+router.post('/edit', (req, res, next) => {
+  const { name, color, dob, catches } = req.body;
+  const keeper = req.session.passport.user;
+  // const birdId = req.params.id;
+  console.log('req.body', req.body);
+  Bird.findOneAndUpdate({ name: name}, { $set: { color, dob, catches }})
+  .then((bird) => {
+    res.redirect('/users/dashboard')
+  })
+  .catch((error) => {
+    next(error)
+  });
+});
 
 // Delete bird
 // router.get('/delete', (req, res, next) => {
