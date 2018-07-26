@@ -2,10 +2,10 @@
 const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
-function capitalizeFirstLetter(letter) {
-  if (typeof letter !== 'string') letter = '';
-  return letter.charAt(0).toUpperCase() + letter.substring(1);
-}
+// function capitalizeFirstLetter(letter) {
+//   if (typeof letter !== 'string') letter = '';
+//   return letter.charAt(0).toUpperCase() + letter.substring(1);
+// }
 
 const userSchema = new Schema({
   // name: {

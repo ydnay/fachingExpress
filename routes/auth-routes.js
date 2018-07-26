@@ -3,6 +3,7 @@ const authRoutes    = express.Router();
 const passport      = require('passport');
 const ensureLogin   = require('connect-ensure-login');
 const ensureLogout  = require('connect-ensure-login');
+const uploadCloud   = require('../config/cloudinary.js');
 
 // User model
 const User          = require('../models/User');
@@ -36,7 +37,8 @@ authRoutes.get('/signup', (req, res, next) => {
 //   passReqToCallback: true
 // }));
 
-authRoutes.post('/signup', (req, res, next) => {
+authRoutes.post('/signup', uploadCloud.single('profilePic'), (req, res, next) => {
+  console.log(req.file, req.body);
   const username = req.body.username;
   const password = req.body.password;
 
