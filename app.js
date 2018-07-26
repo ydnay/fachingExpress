@@ -16,7 +16,6 @@ const LocalStrategy = require('passport-local').Strategy;
 const User          = require('./models/User');
 const flash         = require('connect-flash');
 
-
 mongoose.Promise = Promise;
 mongoose
   .connect(process.env.MONGODB_URI, {useMongoClient: true})
@@ -60,7 +59,7 @@ passport.deserializeUser((id, cb) => {
 app.use(flash());
 
 // Login local strategy
-passport.use(new LocalStrategy( { passReqToCallback: true }, (req, username, password, next) => {
+passport.use('local-login', new LocalStrategy( { passReqToCallback: true }, (req, username, password, next) => {
   User.findOne({ username }, (err, user) => {
     if (err) {
       return next(err);

@@ -55,19 +55,23 @@ router.post('/add-bird', (req, res, next) => {
 });
 
 // Show form to edit bird
-router.get('/edit', (req, res, next) => {
-  res.render('birds/edit-bird');
+router.get('/edit/:id', (req, res, next) => {
+  Bird.findById(req.params.id)
+    .then((bird) => {
+      res.render('birds/edit-bird', {bird})
+    })
+    .catch((error) => {
+      next(error)
+    });
 });
 
 // Edit bird
 // Modify to findByIdAndUpdate to be able to change name
 // Fix dob null
-router.post('/edit', (req, res, next) => {
+router.post('/edit/:id', (req, res, next) => {
   const { name, color, dob, catches } = req.body;
-  const keeper = req.session.passport.user;
-  // const birdId = req.params.id;
   console.log('req.body', req.body);
-  Bird.findOneAndUpdate({ name: name}, { $set: { color, dob, catches }})
+  Bird.findByIdAndUpdate(req.params.id, { $set: { name, color, dob, catches }})
   .then((bird) => {
     res.redirect('/users/dashboard')
   })
@@ -77,15 +81,17 @@ router.post('/edit', (req, res, next) => {
 });
 
 // Delete bird
-// router.get('/delete', (req, res, next) => {
-//   const keeper = req.session.passport.user;
-//   Bird.findOneAndRemove(keeper)
-//   .then(bird => {
-//     res.redirect('/users/dashboard');
-//   })
-//   .catch(err => {
-//     next(err);
-//   });
-// });
+router.get('/delete/:id', (req, res, next) => {
+  const name = req.body;
+  console.log(name);
+  Bird.findByIdAndRemove(req.params.id)
+  // Bird.findOneAndDelete({name: name})
+  .then(bird => {
+    res.redirect('/users/dashboard');
+  })
+  .catch(err => {
+    next(err);
+  });
+});
 
 module.exports = router;

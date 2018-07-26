@@ -8,9 +8,9 @@
     <h1>DOB: {{this.dob}}</h1>
     <h1>Catches: {{this.catches}}</h1>
 
-    <a href="/birds/edit"><button class="ui massive button" id="bot-login">Edit Bird</button></a>
+    <a href="/birds/edit/{{this._id}}"><button class="ui massive button" id="bot-login">Edit Bird</button></a>
 
-    <a href="/birds/delete"><button class="ui massive button" id="bot-login">Delete Bird</button></a>
+    <a href="/birds/delete/{{this._id}}"><button class="ui massive button" id="bot-login">Delete Bird</button></a>
     {{!-- <h1>Welcome <br>{{foundBird.name}}</h1> --}}
   {{/each}}
 </div>

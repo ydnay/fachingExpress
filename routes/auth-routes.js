@@ -11,15 +11,13 @@ const User          = require('../models/User');
 const bcrypt        = require('bcrypt');
 const bcryptSalt    = 10;
 
-// authRoutes.get('/private-page', ensureLogin.ensureLoggedIn(), (req, res) => {
-//   res.render('auth/private', { user: req.user });
-// });
-
 authRoutes.get('/login', (req, res, next) => {
-  res.render('auth/login', { 'message': req.flash('error') });
+  // const userId = req.user._id;
+  // console.log(userId);
+  res.render('auth/login', {'message': req.flash('error') });
 });
 
-authRoutes.post('/login', passport.authenticate('local', {
+authRoutes.post('/login', passport.authenticate('local-login', {
   successRedirect: '/users/dashboard',
   failureRedirect: '/login',
   failureFlash: true,

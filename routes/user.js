@@ -27,10 +27,28 @@ router.get('/dashboard', (req, res, next) => {
   });
 });
 
+// router.get('/:id', (req, res, next) => {
+//   const userId = req.params.id;
+//   console.log(userId);
+//   if (!userId) { 
+//     return res.status(404).render('not-found');
+//   }
+//   User.findById(userId)
+//     .then(user => {
+//       if(!user) {
+//         return res.status(404).render('not-found');
+//       }
+//       res.render('users/dashboard', user);
+//     })
+//     .catch(next);
+// })
+
 router.get('/birds', (req, res, next) => {
-  // const keeper = req.session.passport.user;
+  const keeper = req.session.passport.user;
   // console.log(keeper);
-  Bird.find({ keeper: req.session.passport.user }, (err, foundBirds) => {
+  // const userId = req.params.id;
+  // consle.log(userId, 'userId');
+  Bird.find({ keeper: keeper }, (err, foundBirds) => {
     if (err) {
       console.log(err);
       next(err);
