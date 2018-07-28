@@ -18,7 +18,8 @@ img {
 
 #bot-index,
 #bot-login,
-#bot-sign-up {
+#bot-sign-up,
+#bot-edit-bird {
   margin: 10%;
   background-color: #0098DA;
   color: white; }
