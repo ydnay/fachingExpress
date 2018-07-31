@@ -101,6 +101,7 @@ app.use((req, res, next) => {
   next();
 });
 
+// hbs helpers
 hbs.registerHelper('ifUndefined', (value, options) => {
   if (arguments.length < 2)
       throw new Error('Handlebars Helper ifUndefined needs 1 parameter');
